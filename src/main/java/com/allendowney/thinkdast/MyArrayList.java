@@ -200,7 +200,7 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T remove(int index) {
-		final T element = array[index];
+		final T element = get(index);
 
 		for (int i = index; i < size - 1; i++) {
 			array[i] = array[i + 1];
