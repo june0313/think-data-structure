@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.allendowney.thinkdast;
 
@@ -82,7 +82,23 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		//TODO: FILL THIS IN!
+		Node newNode = new Node(element);
+
+		if (index == 0) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+	        Node prevNode = head;
+	        for (int i = 0; i < index - 1; i++) {
+		        prevNode = prevNode.next;
+	        }
+
+	        Node nextNode = prevNode.next;
+	        prevNode.next = newNode;
+	        newNode.next = nextNode;
+        }
+
+		size++;
 	}
 
 	@Override
@@ -143,7 +159,18 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		//TODO: FILL THIS IN!
+		int index = 0;
+		Node node = head;
+
+		do {
+			if (equals(node.data, target)) {
+				return index;
+			}
+
+			index++;
+			node = node.next;
+		} while (node != null);
+
 		return -1;
 	}
 
@@ -208,8 +235,27 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		//TODO: FILL THIS IN!
-		return null;
+		if (index == 0) {
+			Node removedNode = head;
+			head = head.next;
+			removedNode.next = null;
+			size--;
+			return removedNode.data;
+		}
+
+		Node prevNode = head;
+		Node curNode = head.next;
+
+		for (int i = 0; i < index - 1; i++) {
+			prevNode = prevNode.next;
+			curNode = curNode.next;
+		}
+
+		prevNode.next = curNode.next;
+		curNode.next = null;
+
+		size--;
+		return curNode.data;
 	}
 
 	@Override
