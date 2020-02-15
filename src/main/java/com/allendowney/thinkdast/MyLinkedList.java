@@ -159,17 +159,14 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		int index = 0;
 		Node node = head;
 
-		do {
+		for (int i = 0; i < size; i++) {
 			if (equals(node.data, target)) {
-				return index;
+				return i;
 			}
-
-			index++;
 			node = node.next;
-		} while (node != null);
+		}
 
 		return -1;
 	}
