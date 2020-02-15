@@ -82,20 +82,11 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		Node newNode = new Node(element);
-
 		if (index == 0) {
-            newNode.next = head;
-            head = newNode;
+            head = new Node(element, head);
         } else {
-	        Node prevNode = head;
-	        for (int i = 0; i < index - 1; i++) {
-		        prevNode = prevNode.next;
-	        }
-
-	        Node nextNode = prevNode.next;
-	        prevNode.next = newNode;
-	        newNode.next = nextNode;
+			Node node = getNode(index - 1);
+			node.next = new Node(element, node.next);
         }
 
 		size++;
@@ -176,7 +167,6 @@ public class MyLinkedList<E> implements List<E> {
 	 * Handles the special case that the target is null.
 	 *
 	 * @param target
-	 * @param object
 	 */
 	private boolean equals(Object target, Object element) {
 		if (target == null) {
