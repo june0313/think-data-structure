@@ -222,27 +222,17 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
+		E element = get(index);
+
 		if (index == 0) {
-			Node removedNode = head;
 			head = head.next;
-			removedNode.next = null;
-			size--;
-			return removedNode.data;
+		} else {
+			Node node = getNode(index - 1);
+			node.next = node.next.next;
 		}
-
-		Node prevNode = head;
-		Node curNode = head.next;
-
-		for (int i = 0; i < index - 1; i++) {
-			prevNode = prevNode.next;
-			curNode = curNode.next;
-		}
-
-		prevNode.next = curNode.next;
-		curNode.next = null;
 
 		size--;
-		return curNode.data;
+		return element;
 	}
 
 	@Override
