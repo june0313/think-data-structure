@@ -14,8 +14,8 @@ public class ProfileListAdd {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		profileArrayListAddEnd();
-		//profileArrayListAddBeginning();
+//		profileArrayListAddEnd();
+		profileArrayListAddBeginning();
 		//profileLinkedListAddBeginning();
 		//profileLinkedListAddEnd();
 	}
@@ -37,7 +37,7 @@ public class ProfileListAdd {
 				}
 			}
 		};
-		int startN = 4000;
+		int startN = 512000;
 		int endMillis = 1000;
 		runProfiler("ArrayList add end", timeable, startN, endMillis);
 	}
@@ -46,7 +46,25 @@ public class ProfileListAdd {
 	 * Characterize the run time of adding to the beginning of an ArrayList
 	 */
 	public static void profileArrayListAddBeginning() {
-		// TODO: FILL THIS IN!
+		Timeable timeable = new Timeable() {
+			List<String> list;
+
+			@Override
+			public void setup(int n) {
+				list = new ArrayList<>();
+			}
+
+			@Override
+			public void timeMe(int n) {
+				for (int i = 0; i < n; i++) {
+					list.add(0, "a string");
+				}
+
+			}
+		};
+		int startN = 4000;
+		int endMillis = 1000;
+		runProfiler("ArrayList add first", timeable, startN, endMillis);
 	}
 
 	/**
